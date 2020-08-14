@@ -6,16 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.enigma.exercise_fragment.view_model.CounterViewModel
 import kotlinx.android.synthetic.main.fragment_counter.*
 
 
 class CounterFragment : Fragment(), View.OnClickListener {
 
-    lateinit var counterHandler: CounterHandler
+    val counterViewModel : CounterViewModel by activityViewModels<CounterViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        counterHandler = activity as CounterHandler
+
+//        counterHandler = activity as CounterHandler
     }
 
     override fun onCreateView(
@@ -36,11 +39,11 @@ class CounterFragment : Fragment(), View.OnClickListener {
         when(v){
             increaseButton ->{
                 println("INCREASE BUTTON KEPANGGIL")
-                counterHandler.notifyCounterIncrease()
+                counterViewModel.increase()
             }
             decreaseButton ->{
                 println("DECREASE BUTTON KEPANGGIL")
-                counterHandler.notifyCounterDecrease()
+                counterViewModel.decrease()
             }
         }
     }
